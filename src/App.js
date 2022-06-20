@@ -1,23 +1,23 @@
-import logo from './logo.svg';
+
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
+import { ADDTENACTION } from './redux/reducer';
 
 function App() {
+  const [input, setInput] = useState(0);
+  const dispath = useDispatch();
+  const ten = useSelector(state => state.addten)
+  const sendNum = ()=>{
+    dispath(ADDTENACTION(Number(input)))
+    console.log(ten);
+  }
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input value={input} onChange={(e) => setInput(e.target.value)} type="number" />
+      <button onClick={sendNum}>submit</button>
+      <div>{ten}</div>
     </div>
   );
 }
